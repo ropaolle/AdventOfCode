@@ -1,0 +1,23 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "Tresting AoC 2020.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w ./2020/day01"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ropaolle/AdventOfCode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ropaolle/AdventOfCode/issues"
+  },
+  "homepage": "https://github.com/ropaolle/AdventOfCode#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.6"
+  }
+}
