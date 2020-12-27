@@ -38,4 +38,4 @@ console.clear();
 console.log('Part one:', partOne(data));
 console.log('Part two:', partTwo(data));
 
-// process.exit(2)
+process.exit(2)
