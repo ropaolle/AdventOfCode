@@ -13,7 +13,5 @@ const partTwo = (data) => {
 };
 
 // console.clear();
-console.log('Part one:', partOne(data));
-console.log('Part two:', partTwo(data));
-
-// process.exit(2)
+console.table({ partOne: partOne(data), partTwo: partTwo(data) });
+//  process.exit(2)
