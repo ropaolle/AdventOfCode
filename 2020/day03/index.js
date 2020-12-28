@@ -1,19 +1,29 @@
-const { loadData, numSort } = require('../../lib.js');
+const { loadData } = require('../../lib.js');
 
-const data = loadData('data-test.txt')
-  .map((v) => Number(v))
-  .sort(numSort); // .slice(0, 100);
+const data = loadData('data.txt');
 
-const partOne = (data) => {
-  
+const countTrees = (right, down, mapWith, data) => {
+  let count = 0;
+  let x = 0;
+  for (let y = down; y < data.length; y += down) {
+    x += right;
+    if (data[y][x % mapWith] === '#') {
+      count += 1;
+    }
+  }
+
+  return count;
 };
 
-const partTwo = (data) => {
- 
-};
+const partOne = (data) => countTrees(3, 1, 31, data);
+
+const partTwo = (data) =>
+  countTrees(1, 1, 31, data) *
+  countTrees(3, 1, 31, data) *
+  countTrees(5, 1, 31, data) *
+  countTrees(7, 1, 31, data) *
+  countTrees(1, 2, 31, data);
 
 // console.clear();
-console.log('Part one:', partOne(data));
-console.log('Part two:', partTwo(data));
-
-// process.exit(2)
+console.table({ partOne: partOne(data), partTwo: partTwo(data) });
+//  process.exit(2)
