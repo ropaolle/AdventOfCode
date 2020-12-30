@@ -1,13 +1,44 @@
-const { loadData, numSort } = require('../../lib.js');
+const { loadData } = require('../../lib.js');
 
-const rawData = loadData('data-test.txt')
-  .map((v) => Number(v))
-  .sort(numSort); // .slice(0, 100);
+const data = loadData(__dirname, 'data.txt', { numeric: true, sorted: true });
 
-const partOne = (data) => {};
+const partOne = () => {
+  // const isAllUnique = data.length - new Set(data).size === 0;
+  // const max = data[data.length - 1] + 3;
+  let pointer = 0;
+  let ones = 0;
+  let threes = 0;
+  for (let index = 0; index < data.length; index++) {
+    const diff = data[index] - pointer;
+    switch (diff) {
+      case 1:
+        ones += 1;
+        break;
+      case 3:
+        threes += 1;
+    }
+    pointer = data[index];
+    // console.log('ones, threes', ones, threes, index);
+  }
+  return ones * (threes + 1);
+};
 
-const partTwo = (data) => {};
+const partTwo = () => {
+  const map = new Map([[0, 1]]);
+  for (let i = 0; i < data.length; i++) {
+    const ways =
+    (map.get(data[i] - 1) || 0) +
+    (map.get(data[i] - 2) || 0) +
+    (map.get(data[i] - 3) || 0);
+    map.set(data[i], ways);
+  }
+  return map.get(data.pop());
+};
 
 // console.clear();
-console.table({ partOne: partOne(rawData), partTwo: partTwo(rawData) });
-//  process.exit(2)
+// console.log('Part one:', partOne());
+console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;
