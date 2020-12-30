@@ -1,13 +1,15 @@
 const { loadData, numSort } = require('../../lib.js');
 
-const rawData = loadData('data-test.txt')
-  .map((v) => Number(v))
-  .sort(numSort); // .slice(0, 100);
+const data = loadData(__dirname, 'data-test.txt', { numeric: false, sorted: false });
 
-const partOne = (data) => {};
+const partOne = () => {};
 
-const partTwo = (data) => {};
+const partTwo = () => {};
 
 // console.clear();
-console.table({ partOne: partOne(rawData), partTwo: partTwo(rawData) });
-//  process.exit(2)
+// console.log('Part one:', partOne());
+// console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;

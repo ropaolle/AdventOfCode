@@ -1,6 +1,6 @@
-const { loadData, numSort } = require('../../lib.js');
+const { loadData } = require('../../lib.js');
 
-const rawData = loadData('data.txt').map((v) => ({
+const data = loadData(__dirname, 'data.txt').map((v) => ({
   operator: v.substring(0, 3),
   argument: Number(v.substring(4)),
 }));
@@ -43,12 +43,12 @@ const getLastInstruction = (data) => {
   return { acc, pointer, index, instructions: data.length };
 };
 
-const partOne = (data) => {
+const partOne = () => {
   const { acc } = getLastInstruction(data);
   return acc;
 };
 
-const partTwo = (data) => {
+const partTwo = () => {
   let acc = 0;
 
   const nopsAndJmps = data.reduce((acc, { operator, argument }, i) => {
@@ -75,5 +75,9 @@ const partTwo = (data) => {
 };
 
 // console.clear();
-console.table({ partOne: partOne(rawData), partTwo: partTwo(rawData) });
-// process.exit(2)
+// console.log('Part one:', partOne());
+// console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;

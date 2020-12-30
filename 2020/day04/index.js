@@ -1,6 +1,6 @@
 const { loadData } = require('../../lib.js');
 
-const data = loadData('data.txt')
+const data = loadData(__dirname, 'data.txt')
   .reduce(
     (acc, line) => {
       if (line.trim().length > 0) {
@@ -25,10 +25,10 @@ const data = loadData('data.txt')
 
 const fields = ['ecl', 'pid', 'eyr', 'hcl', 'byr', 'iyr', /* 'cid', */ 'hgt'];
 
-const partOne = (data) =>
+const partOne = () =>
   data.filter((v) => fields.every((field) => v.hasOwnProperty(field))).length;
 
-const partTwo = (data) =>
+const partTwo = () =>
   data.filter((v) => {
     if (Object.keys(v).length < 7) {
       return;
@@ -81,5 +81,9 @@ const partTwo = (data) =>
   }).length;
 
 // console.clear();
-console.table({ partOne: partOne(data), partTwo: partTwo(data) });
-// process.exit(2)
+// console.log('Part one:', partOne());
+// console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;

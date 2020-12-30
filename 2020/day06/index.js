@@ -1,6 +1,6 @@
 const { loadData } = require('../../lib.js');
 
-const data = loadData('data.txt').reduce(
+const data = loadData(__dirname, 'data.txt').reduce(
   (acc, line) => {
     if (line.trim().length > 0) {
       acc[acc.length - 1].push(line);
@@ -25,21 +25,24 @@ const chrCount = (val) =>
     return acc;
   }, {});
 
-const partOne = (data) =>
+const partOne = () =>
   data
     .map((v) => (v.length === 1 ? v[0].length : Object.keys(chrCount(v)).length))
     .reduce((acc, v) => acc + v, 0);
 
-const partTwo = (data) =>
+const partTwo = () =>
   data
-    .map((v) => {
-      if (v.length === 1) {
-        return v[0].length;
-      }
-      return Object.values(chrCount(v)).filter((v2) => v2 === v.length).length;
-    })
+    .map((v) =>
+      v.length === 1
+        ? v[0].length
+        : Object.values(chrCount(v)).filter((v2) => v2 === v.length).length
+    )
     .reduce((acc, v) => acc + v, 0);
 
 // console.clear();
-console.table({ partOne: partOne(data), partTwo: partTwo(data) });
-//  process.exit(2)
+// console.log('Part one:', partOne());
+// console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;

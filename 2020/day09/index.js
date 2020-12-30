@@ -1,6 +1,6 @@
-const { loadData, numSort } = require('../../lib.js');
+const { loadData } = require('../../lib.js');
 
-const rawData = loadData('data.txt').map((v) => Number(v));
+const data = loadData(__dirname, 'data.txt').map((v) => Number(v));
 
 const sumExist = (val, arr) => {
   for (let i = 0; i < arr.length; i++) {
@@ -13,7 +13,7 @@ const sumExist = (val, arr) => {
   return false;
 };
 
-const partOne = (data) => {
+const partOne = () => {
   const preambleSize = 25;
   let window = data.slice(0, preambleSize);
 
@@ -29,7 +29,7 @@ const partOne = (data) => {
   }
 };
 
-const partTwo = (data) => {
+const partTwo = () => {
   const test = 177777905; //127;
 
   for (let i = 0; i < data.length; i++) {
@@ -54,6 +54,10 @@ const partTwo = (data) => {
   }
 };
 
-console.clear();
-console.table({ partOne: partOne(rawData), partTwo: partTwo(rawData) });
-// process.exit(2)
+// console.clear();
+// console.log('Part one:', partOne());
+// console.log('Part two:', partTwo());
+
+// Exports
+exports.partOne = partOne;
+exports.partTwo = partTwo;

@@ -4,6 +4,7 @@
   "description": "Tresting AoC 2020.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha -w ./2020/day01"
   },
   "repository": {
