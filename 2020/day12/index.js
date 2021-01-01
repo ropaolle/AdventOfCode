@@ -1,6 +1,6 @@
 const { loadData } = require('../../lib.js');
 
-const data = loadData(__dirname, 'data-test.txt').map((v) => ({
+const data = loadData(__dirname, 'data.txt').map((v) => ({
   cmd: v[0],
   val: Number(v.substring(1)),
 }));
@@ -10,7 +10,7 @@ const partOne = () => {
   let direction = 1;
   let northSouth = 0;
   let eastWest = 0;
-  const l = []
+  const l = [];
 
   const addDistance = (direction, distance) => {
     switch (direction) {
@@ -18,13 +18,13 @@ const partOne = () => {
         northSouth += distance;
         break;
       case 'S':
-        northSouth = Math.abs(northSouth - distance);
+        northSouth -= distance;
         break;
       case 'E':
         eastWest += distance;
         break;
       case 'W':
-        eastWest = Math.abs(eastWest - distance);
+        eastWest -= distance;
         break;
     }
   };
@@ -35,24 +35,29 @@ const partOne = () => {
         addDistance(directions[direction], val);
         break;
       case 'L':
-        direction = Math.abs((direction - val / 90) % 4);
+        // +4 to compensate for negative values
+        direction = (direction + 4 - val / 90) % 4;
         break;
       case 'R':
-        direction = Math.abs((direction + val / 90) % 4);
+        direction = (direction + val / 90) % 4;
         break;
-      default:
+      case 'N':
+      case 'E':
+      case 'S':
+      case 'W':
         addDistance(cmd, val);
         break;
     }
-    l.push({ cmd, val, direction, direction2: directions[direction], northSouth, eastWest });
+
+    // l.push({ cmd, val, direction, direction2: directions[direction], northSouth, eastWest });
   });
 
-  console.table(l)
+  // console.table(l);
 
-  return eastWest + northSouth;
+  return Math.abs(eastWest) + Math.abs(northSouth);
 };
 
-const partTwo = () => {}; //TODO: 3547 too high.
+const partTwo = () => {}; 
 
 console.log('Part one:', partOne());
 // console.log('Part two:', partTwo());
